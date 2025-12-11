@@ -1,6 +1,6 @@
 # Why Tom Bombadil Was a Mistake
 
-[< Back Home](/)
+[< Back Home](./)
 
 ![Tom Bombadil image](images/tom.png)
 
