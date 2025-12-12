@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - dev/uv-integrate
   workflow_dispatch: # Allows manual trigger
 
 permissions:
@@ -14,17 +16,17 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: ${{ github.ref_name == 'main' && 'github-pages' || 'github-pages-dev' }}
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
         with:
-          python-version: "3.x"
+          enable-cache: true
 
       - name: Setup Pages
         id: pages
@@ -38,7 +40,7 @@ jobs:
           if [ -n "$BASE_PATH" ] && [ "$BASE_PATH" != "/" ]; then
             BASE_PATH="${BASE_PATH%/}/"
           fi
-          python src/main.py "$BASE_PATH"
+          uv run python src/main.py "$BASE_PATH"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

@@ -1,2 +1,18 @@
+# Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment (managed by uv)
+.venv/
+
+# Build output
 public/
+
+# Testing
+.pytest_cache/
+
+# NOTE: uv.lock should be committed (like package-lock.json)
+# It ensures reproducible builds across environments

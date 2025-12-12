@@ -1,2 +1,2 @@
 #!/bin/bash
-python -m unittest discover -s src
+uv run python -m unittest discover -s src

@@ -1,5 +1,6 @@
 import os
 
+from bs4 import BeautifulSoup
 from block_markdown import markdown_to_html_node
 
 
@@ -28,12 +29,16 @@ def generate_page(from_path, template_path, dest_path, basepath="/"):
     page = page.replace("{{ Content }}", html_content)
     page = page.replace("{{ BasePath }}", basepath)
 
+    # Format HTML with BeautifulSoup for better readability
+    soup = BeautifulSoup(page, 'html.parser')
+    formatted_page = soup.prettify()
+
     dest_dir = os.path.dirname(dest_path)
     if dest_dir:
         os.makedirs(dest_dir, exist_ok=True)
 
     with open(dest_path, "w") as f:
-        f.write(page)
+        f.write(formatted_page)
         
 def generate_page_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     for filename in os.listdir(dir_path_content):
