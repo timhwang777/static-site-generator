@@ -1,14 +1,41 @@
 <!doctype html>
+<!--
+  HTML Template for Static Site Generator
+
+  This template is used for all generated pages. The following placeholders
+  are replaced during page generation:
+
+  {{ Title }}    - Page title extracted from first H1 heading in markdown
+  {{ Content }}  - Generated HTML content from markdown
+  {{ BasePath }} - Base URL path for the site (e.g., "/" or "/repo-name/")
+
+  The <base> tag ensures all relative URLs (CSS, images, links) resolve
+  correctly when deployed to GitHub Pages subdirectories.
+-->
 <html>
   <head>
+    <!--
+      Base path for resolving relative URLs.
+      Example: <base href="/my-site/"> makes "images/photo.png"
+      resolve to "/my-site/images/photo.png"
+    -->
     <base href="{{ BasePath }}" />
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Page title from markdown H1 -->
     <title>{{ Title }}</title>
+
+    <!--
+      Relative path to CSS - resolves via <base> tag.
+      Actual path: {{ BasePath }}index.css
+    -->
     <link href="index.css" rel="stylesheet" />
   </head>
 
   <body>
+    <!-- Generated HTML content inserted here -->
     <article>{{ Content }}</article>
   </body>
 </html>
